@@ -1,0 +1,4 @@
+export const CONTACT_START = 'CONTACT_START';
+export const CONTACT_SUCCESS = 'CONTACT_SUCCESS';
+export const CONTACT_FAILED = 'CONTACT_FAILED';
+export const ADD_CONTACT = 'ADD_CONTACT';
