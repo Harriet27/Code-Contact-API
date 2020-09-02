@@ -44,8 +44,6 @@ const List = () => {
         });
     };
 
-    console.log(formEdit);
-
     const handleDelete = (id) => {
         Swal.fire({
             title: 'Are you sure?',
