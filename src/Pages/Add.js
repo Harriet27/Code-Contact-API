@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { addContact } from '../Redux/Action/contactAction';
 import phone from '../assets/phone.png';
+import ayee from '../assets/ayee.png';
 
 const Add = () => {
     const dispatch = useDispatch();
@@ -65,13 +66,16 @@ const Add = () => {
 
     return (
         <div style={{backgroundColor:'#FAF0E6', backgroundSize:'cover', height:'100vh'}}>
+            <div style={{position:'absolute', top:'8%', left:'10%'}}>
+                <img src={ayee} alt='gambar' height={500} />
+            </div>
             <div className='col' style={styles.addForm}>
                 <div style={{display:'block', textAlign:'center'}}>
                     <div style={styles.title}>
                         <img src={phone} alt='add icon' height={70} />
                     </div>
                     <div style={styles.inputForm}>
-                        <Input 
+                        <Input
                             type='text'
                             name='firstName'
                             placeholder='First Name'
@@ -124,7 +128,7 @@ const styles = {
         borderRadius: '50px',
         textAlign: 'center',
         top: '12%',
-        left: '35%',
+        left: '55%',
     },
     title: {
         marginTop: '50px',
@@ -144,12 +148,12 @@ const styles = {
         paddingLeft: '15px',
     },
     button1: {
-        width: '300px',
+        width: '250px',
         margin: '5px',
         borderRadius: '40px',
     },
     button2: {
-        width: '200px',
+        width: '170px',
         margin: '5px',
         borderRadius: '40px',
     },

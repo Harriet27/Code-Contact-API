@@ -83,13 +83,13 @@ const List = () => {
                     <div key={index}>
                         <Card style={{width:'20vw', textAlign:'center', margin:'10px', borderRadius:'20px', overflow:'hidden'}}>
                             <CardHeader tag="h5">
-                                <TextField label='First Name' name='firstName' onChange={handleChange} />
-                                <TextField label='Last Name' name='lastName' onChange={handleChange} />
+                                <TextField label='First Name' name='firstName' defaultValue={val.firstName} onChange={handleChange} />
+                                <TextField label='Last Name' name='lastName' defaultValue={val.lastName} onChange={handleChange} />
                             </CardHeader>
                             <CardBody>
-                                <TextField label='Photo URL' name='photo' onChange={handleChange} />
+                                <TextField label='Photo URL' name='photo' defaultValue={val.photo} onChange={handleChange} />
                                 <CardText style={{marginTop:'10px'}}>
-                                    <TextField label='Age' name='age' onChange={handleChange} />
+                                    <TextField label='Age' name='age' defaultValue={val.age} onChange={handleChange} />
                                 </CardText>
                                 <div style={{display:'flex', justifyContent:'center'}}>
                                     <Button variant='outlined' color='primary' startIcon={<EditIcon />} style={{display:'flex', marginBottom:'10px'}} onClick={() => setToggle(null)}>
@@ -142,7 +142,7 @@ const List = () => {
     };
 
     return (
-        <div style={{backgroundColor:'#FAF0E6', backgroundSize:'cover', height:'100vh'}}>
+        <div style={{backgroundColor:'#FAF0E6', backgroundSize:'cover', height:'100%', backgroundRepeat:'repeat'}}>
             <div style={{display:'flex', justifyContent:'center', padding:'20px', position:'sticky'}}>
                 <Link to='/add'>
                     <Button variant='contained' color='primary' style={{padding:'15px 50px'}}>
