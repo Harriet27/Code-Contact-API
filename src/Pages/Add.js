@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@material-ui/core';
 import { Input } from 'reactstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { addContact } from '../Redux/Action/contactAction';
@@ -18,6 +18,8 @@ const Add = () => {
         photo: '',
     });
 
+    const loading = useSelector((state) => state.contact.loading);
+
     useEffect(() => {
         document.title = 'Add Contacts';
     });
@@ -30,38 +32,46 @@ const Add = () => {
     };
 
     const handleSaveContact = () => {
-        Swal.fire({
-            title: 'Are you sure you want to add this contact?',
-            text: 'You can edit the contact later on ',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, add it!',
-        }).then((res) => {
-            if (res.value) {
-                Swal.fire(
-                    'Success!',
-                    'Contact has been added.',
-                    'success',
-                );
-                let { firstName, lastName, age, photo } = input;
-                let formData = new FormData();
-                formData.append('firstName', firstName);
-                formData.append('lastName', lastName);
-                formData.append('age', age);
-                formData.append('photo', photo);
-                dispatch(addContact(formData));
-                setInput({
-                    firstName: '',
-                    lastName: '',
-                    age: '',
-                    photo: '',
-                });
-            }
-        }).catch((err) => {
-            console.log(err);
-        })
+        if (!input.firstName || !input.lastName || !input.age || !input.age) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops....',
+                text: 'Please fill all required fields!',
+            })
+        } else {
+            Swal.fire({
+                title: 'Are you sure you want to add this contact?',
+                text: 'You can edit the contact later on',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, add it!',
+            }).then((res) => {
+                if (res.value) {
+                    Swal.fire(
+                        'Success!',
+                        'Contact has been added.',
+                        'success',
+                    );
+                    let { firstName, lastName, age, photo } = input;
+                    let formData = new FormData();
+                    formData.append('firstName', firstName);
+                    formData.append('lastName', lastName);
+                    formData.append('age', age);
+                    formData.append('photo', photo);
+                    dispatch(addContact(formData));
+                    setInput({
+                        firstName: '',
+                        lastName: '',
+                        age: '',
+                        photo: '',
+                    });
+                }
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
     };
 
     return (
@@ -105,7 +115,13 @@ const Add = () => {
                             onChange={handleChange}
                         />
                         <Button variant='contained' color='secondary' style={styles.button1} onClick={handleSaveContact}>
-                            Add to my Contacts
+                            {
+                              loading
+                              ?
+                              'loading...'
+                              :
+                              'Add to my Contacts'
+                            }
                         </Button>
                         <NavLink to='/' style={styles.link}>
                             <Button variant='outlined' color='primary' style={styles.button2}>
@@ -150,12 +166,12 @@ const styles = {
     button1: {
         width: '250px',
         margin: '5px',
-        borderRadius: '40px',
+        borderRadius: '20px',
     },
     button2: {
         width: '170px',
         margin: '5px',
-        borderRadius: '40px',
+        borderRadius: '20px',
     },
     link: {
         textDecoration: 'none',
